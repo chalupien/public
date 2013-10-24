@@ -150,7 +150,7 @@
 	self.device = nil;
 }
 
-#pragma mark - PLTDeviceInfoSubscriber
+#pragma mark - PLTDeviceInfoObserver
 
 //- (void)subscribe
 //{
@@ -223,6 +223,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+	[super viewWillAppear:animated];
+	
 	NSArray *devices = [PLTDevice availableDevices];
 	if ([devices count]) {
 		self.device = devices[0];

@@ -16,6 +16,7 @@
 		425EC4A817E2881F0009FF93 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 425EC4A717E2881F0009FF93 /* main.m */; };
 		425EC4AC17E2881F0009FF93 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 425EC4AB17E2881F0009FF93 /* AppDelegate.m */; };
 		425EC4B517E2881F0009FF93 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 425EC4B417E2881F0009FF93 /* ViewController.m */; };
+		42F8714D1819C64300447496 /* libPLTDevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F8714C1819C64300447496 /* libPLTDevice.a */; };
 		42F9018017F11133009ABA3F /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F9017F17F11133009ABA3F /* ExternalAccessory.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,20 @@
 		425EC4B317E2881F0009FF93 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		425EC4B417E2881F0009FF93 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		425EC4BD17E2881F0009FF93 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		42F8713E1819C64300447496 /* PLTCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTCalibration.h; sourceTree = "<group>"; };
+		42F8713F1819C64300447496 /* PLTConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTConfiguration.h; sourceTree = "<group>"; };
+		42F871401819C64300447496 /* PLTDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTDevice.h; sourceTree = "<group>"; };
+		42F871411819C64300447496 /* PLTFreeFallInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTFreeFallInfo.h; sourceTree = "<group>"; };
+		42F871421819C64300447496 /* PLTGyroscopeCalibrationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTGyroscopeCalibrationInfo.h; sourceTree = "<group>"; };
+		42F871431819C64300447496 /* PLTInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTInfo.h; sourceTree = "<group>"; };
+		42F871441819C64300447496 /* PLTMagnetometerCalibrationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTMagnetometerCalibrationInfo.h; sourceTree = "<group>"; };
+		42F871451819C64300447496 /* PLTOrientationTrackingCalibration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTOrientationTrackingCalibration.h; sourceTree = "<group>"; };
+		42F871461819C64300447496 /* PLTOrientationTrackingInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTOrientationTrackingInfo.h; sourceTree = "<group>"; };
+		42F871471819C64300447496 /* PLTPedometerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTPedometerInfo.h; sourceTree = "<group>"; };
+		42F871481819C64300447496 /* PLTProximityInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTProximityInfo.h; sourceTree = "<group>"; };
+		42F871491819C64300447496 /* PLTTapsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTTapsInfo.h; sourceTree = "<group>"; };
+		42F8714A1819C64300447496 /* PLTWearingStateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTWearingStateInfo.h; sourceTree = "<group>"; };
+		42F8714C1819C64300447496 /* libPLTDevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPLTDevice.a; sourceTree = "<group>"; };
 		42F9017F17F11133009ABA3F /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -44,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42F9018017F11133009ABA3F /* ExternalAccessory.framework in Frameworks */,
+				42F8714D1819C64300447496 /* libPLTDevice.a in Frameworks */,
 				425EC49E17E2881E0009FF93 /* CoreGraphics.framework in Frameworks */,
 				425EC4A017E2881E0009FF93 /* UIKit.framework in Frameworks */,
 				425EC49C17E2881E0009FF93 /* Foundation.framework in Frameworks */,
@@ -98,6 +114,7 @@
 				425EC4B317E2881F0009FF93 /* ViewController.h */,
 				425EC4B417E2881F0009FF93 /* ViewController.m */,
 				425D378117F0FE400078DA42 /* ViewController_iPhone.xib */,
+				42F8713C1819C64300447496 /* PLTDevice */,
 				425EC4A217E2881F0009FF93 /* Supporting Files */,
 			);
 			path = PLTDeviceExample;
@@ -113,6 +130,43 @@
 				425D378317F1016E0078DA42 /* Images */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42F8713C1819C64300447496 /* PLTDevice */ = {
+			isa = PBXGroup;
+			children = (
+				42F8713D1819C64300447496 /* include */,
+				42F8714B1819C64300447496 /* lib */,
+			);
+			path = PLTDevice;
+			sourceTree = SOURCE_ROOT;
+		};
+		42F8713D1819C64300447496 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				42F8713E1819C64300447496 /* PLTCalibration.h */,
+				42F8713F1819C64300447496 /* PLTConfiguration.h */,
+				42F871401819C64300447496 /* PLTDevice.h */,
+				42F871411819C64300447496 /* PLTFreeFallInfo.h */,
+				42F871421819C64300447496 /* PLTGyroscopeCalibrationInfo.h */,
+				42F871431819C64300447496 /* PLTInfo.h */,
+				42F871441819C64300447496 /* PLTMagnetometerCalibrationInfo.h */,
+				42F871451819C64300447496 /* PLTOrientationTrackingCalibration.h */,
+				42F871461819C64300447496 /* PLTOrientationTrackingInfo.h */,
+				42F871471819C64300447496 /* PLTPedometerInfo.h */,
+				42F871481819C64300447496 /* PLTProximityInfo.h */,
+				42F871491819C64300447496 /* PLTTapsInfo.h */,
+				42F8714A1819C64300447496 /* PLTWearingStateInfo.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		42F8714B1819C64300447496 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				42F8714C1819C64300447496 /* libPLTDevice.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,6 +336,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/mdavis/plantronics-innovation/public/PLTDeviceExample/PLTDevice/lib",
+					"/Users/mdavis/plantronics-innovation/public/Mobile/iOS/PLTDeviceExample/PLTDevice/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -300,6 +355,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/mdavis/plantronics-innovation/public/PLTDeviceExample/PLTDevice/lib",
+					"/Users/mdavis/plantronics-innovation/public/Mobile/iOS/PLTDeviceExample/PLTDevice/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
