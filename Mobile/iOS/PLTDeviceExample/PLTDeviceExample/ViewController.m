@@ -10,9 +10,13 @@
 #import "PLTDevice.h"
 
 
+#define DEVICE_IPAD         ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
+
 @interface ViewController () <PLTDeviceConnectionDelegate, PLTDeviceInfoObserver>
 
 - (void)newDeviceAvailableNotification:(NSNotification *)notification;
+- (void)subscribeToInfo;
 - (void)startFreeFallResetTimer;
 - (void)stopFreeFallResetTimer;
 - (void)freeFallResetTimer:(NSTimer *)theTimer;
@@ -55,6 +59,34 @@
 		self.device.connectionDelegate = self;
 		[self.device openConnection];
 	}
+}
+
+- (void)subscribeToInfo
+{
+    NSError *err = [self.device subscribe:self toService:PLTServiceOrientationTracking withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServiceWearingState withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServiceProximity withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServicePedometer withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServiceFreeFall withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    // note: this doesn't work right.
+    err = [self.device subscribe:self toService:PLTServiceTaps withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServiceMagnetometerCalStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
+    
+    err = [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
+    if (err) NSLog(@"Error: %@", err);
 }
 
 - (void)startFreeFallResetTimer
@@ -111,31 +143,8 @@
 - (void)PLTDeviceDidOpenConnection:(PLTDevice *)aDevice
 {
 	NSLog(@"PLTDeviceDidOpenConnection: %@", aDevice);
-	
-	NSError *err = [self.device subscribe:self toService:PLTServiceOrientationTracking withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	err = [self.device subscribe:self toService:PLTServiceWearingState withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-
-	err = [self.device subscribe:self toService:PLTServiceProximity withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	err = [self.device subscribe:self toService:PLTServicePedometer withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	err = [self.device subscribe:self toService:PLTServiceFreeFall withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	// note: this doesn't work right.
-	err = [self.device subscribe:self toService:PLTServiceTaps withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	err = [self.device subscribe:self toService:PLTServiceMagnetometerCalStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
-	
-	err = [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
-	if (err) NSLog(@"Error: %@", err);
+    
+    [self subscribeToInfo];
 }
 
 - (void)PLTDevice:(PLTDevice *)aDevice didFailToOpenConnection:(NSError *)error
@@ -152,34 +161,18 @@
 
 #pragma mark - PLTDeviceInfoObserver
 
-//- (void)subscribe
-//{
-//	NSError *err = [self.device subscribe:self
-//								toService:PLTServiceOrientationTracking
-//								 withMode:PLTSubscriptionModeOnChange
-//								minPeriod:0];
-//	if (err) NSLog(@"Error: %@", err);
-//}
-//
-//- (void)PLTDevice:(PLTDevice *)aDevice didUpdateInfo:(PLTInfo *)theInfo
-//{
-//	NSLog(@"PLTDevice: %@ didUpdateInfo: %@", aDevice, theInfo);
-//	
-//	if ([theInfo isKindOfClass:[PLTOrientationTrackingInfo class]]) {
-//		PLTOrientationTrackingInfo *orientationInfo = (PLTOrientationTrackingInfo *)theInfo;
-//		NSLog(@"Orientation: %@", NSStringFromEulerAngles(theInfo.eulerAngles));
-//	}
-//}
-
 - (void)PLTDevice:(PLTDevice *)aDevice didUpdateInfo:(PLTInfo *)theInfo
 {
 	NSLog(@"PLTDevice: %@ didUpdateInfo: %@", aDevice, theInfo);
 	
 	if ([theInfo isKindOfClass:[PLTOrientationTrackingInfo class]]) {
-		PLTEulerAngles eulerAngles = ((PLTOrientationTrackingInfo *)theInfo).eulerAngles;
-		self.headingLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.x)];
-		self.pitchLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.y)];
-		self.rollLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.z)];
+         PLTEulerAngles eulerAngles = ((PLTOrientationTrackingInfo *)theInfo).eulerAngles;
+         self.headingLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.x)];
+         [self.headingProgressView setProgress:(eulerAngles.x + 180.0)/360.0 animated:YES];
+         self.pitchLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.y)];
+         [self.pitchProgressView setProgress:(eulerAngles.y + 180.0)/360.0 animated:YES];
+         self.rollLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.z)];
+         [self.rollProgressView setProgress:(eulerAngles.z + 180.0)/360.0 animated:YES];
 	}
 	else if ([theInfo isKindOfClass:[PLTWearingStateInfo class]]) {
 		self.wearingStateLabel.text = (((PLTWearingStateInfo *)theInfo).isBeingWorn ? @"yes" : @"no");
@@ -206,10 +199,10 @@
 		[self startTapsResetTimer];
 	}
 	else if ([theInfo isKindOfClass:[PLTMagnetometerCalibrationInfo class]]) {
-		self.magnetometerCalLabel.text = (((PLTMagnetometerCalibrationInfo *)theInfo).isCalibrated ? @"YES" : @"NO");
+		self.magnetometerCalLabel.text = (((PLTMagnetometerCalibrationInfo *)theInfo).isCalibrated ? @"yes" : @"no");
 	}
 	else if ([theInfo isKindOfClass:[PLTGyroscopeCalibrationInfo class]]) {
-		self.gyroscopeCalLabel.text = (((PLTGyroscopeCalibrationInfo *)theInfo).isCalibrated ? @"YES" : @"NO" );
+		self.gyroscopeCalLabel.text = (((PLTGyroscopeCalibrationInfo *)theInfo).isCalibrated ? @"yes" : @"no" );
 	}
 }
 
@@ -217,7 +210,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithNibName:@"ViewController_iPhone" bundle:nil];
+    if (DEVICE_IPAD) self = [super initWithNibName:@"ViewController_iPad" bundle:nil];
+    else self = [super initWithNibName:@"ViewController_iPhone" bundle:nil];
 	return self;
 }
 
