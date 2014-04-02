@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="blackish">#231F20</color>
+    <color name="minor_label">#444444</color>
+    <color name="value">#0079C2</color>
+</resources>

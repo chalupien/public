@@ -1,12 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/white">
 
-    <TextView
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World, ACTIVITY_ENTRY_NAME" />
-</LinearLayout>
+        android:layout_height="fill_parent"
+        android:layout_marginTop="4pt"
+        android:layout_marginLeft="4pt"
+        android:layout_marginRight="4pt">
 
+        <ImageView
+            android:id="@+id/pltLabsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pltlabs"/>
+
+        <TextView
+            android:id="@+id/orientationLabelTextView"
+            android:layout_below="@id/pltLabsImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="8pt"
+            android:textStyle="bold"
+            android:textColor="@color/blackish"
+            android:text="Orientation" />
+
+        <LinearLayout
+            android:id="@+id/headingLinearLayout"
+            android:layout_below="@id/orientationLabelTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/headingLabelTextView"
+                android:layout_marginLeft="10pt"
+                android:layout_width="30pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/minor_label"
+                android:text="heading" />
+
+            <ProgressBar
+                android:id="@+id/headingProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginTop="3pt"
+                android:layout_marginLeft="4pt"
+                android:layout_marginRight="4pt"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="5pt"
+                android:max="360" />
+
+            <TextView
+                android:id="@+id/headingValueTextView"
+                android:layout_width="20pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/value"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pitchLinearLayout"
+            android:layout_below="@id/headingLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pitchLabelTextView"
+                android:layout_marginLeft="10pt"
+                android:layout_width="30pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/minor_label"
+                android:text="pitch" />
+
+            <ProgressBar
+                android:id="@+id/pitchProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginTop="3pt"
+                android:layout_marginLeft="4pt"
+                android:layout_marginRight="4pt"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="5pt"
+                android:max="180" />
+
+            <TextView
+                android:id="@+id/pitchValueTextView"
+                android:layout_width="20pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/value"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rollLinearLayout"
+            android:layout_below="@id/pitchLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rollLabelTextView"
+                android:layout_marginLeft="10pt"
+                android:layout_width="30pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/minor_label"
+                android:text="roll" />
+
+            <ProgressBar
+                android:id="@+id/rollProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_marginTop="3pt"
+                android:layout_marginLeft="4pt"
+                android:layout_marginRight="4pt"
+                android:layout_weight="1"
+                android:layout_width="fill_parent"
+                android:layout_height="5pt"
+                android:max="180" />
+
+            <TextView
+                android:id="@+id/rollValueTextView"
+                android:layout_width="20pt"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:textSize="7pt"
+                android:textColor="@color/value"
+                android:text="0" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/calOrientationButton"
+            android:layout_below="@id/rollLinearLayout"
+            android:layout_centerInParent="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Calibrate" />
+
+        <LinearLayout
+            android:id="@+id/wearingStateLinearLayout"
+            android:layout_below="@id/calOrientationButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wearingStateLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Wearing?" />
+
+            <TextView
+                android:id="@+id/wearingStateValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="-" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/localProximityLinearLayout"
+            android:layout_below="@id/wearingStateLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/localProximityLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Local Proximity" />
+
+            <TextView
+                android:id="@+id/localProximityValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/remoteProximityLinearLayout"
+            android:layout_below="@id/localProximityLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/remoteProximityLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Remote Proximity" />
+
+            <TextView
+                android:id="@+id/remoteProximityValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tapsLinearLayout"
+            android:layout_below="@id/remoteProximityLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tapsLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Taps" />
+
+            <TextView
+                android:id="@+id/tapsValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="no taps" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pedometerLinearLayout"
+            android:layout_below="@id/tapsLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/pedometerLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Pedometer" />
+
+            <TextView
+                android:id="@+id/pedometerValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="0 steps" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/freeFallLinearLayout"
+            android:layout_below="@id/pedometerLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/freeFallLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Free Fall?" />
+
+            <TextView
+                android:id="@+id/freeFallValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="no" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/magnetometerCalLinearLayout"
+            android:layout_below="@id/freeFallLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/magnetometerCalLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Magnetometer Calibrated?" />
+
+            <TextView
+                android:id="@+id/magnetometerCalValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="no" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gyroscopeCalLinearLayout"
+            android:layout_below="@id/magnetometerCalLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2pt"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/gyroscopeCalLabelTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="@color/blackish"
+                android:text="Gyroscope Calibrated?" />
+
+            <TextView
+                android:id="@+id/gyroscopeCalValueTextView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:textSize="8pt"
+                android:textColor="@color/value"
+                android:text="no" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
