@@ -95,8 +95,14 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 			}
 
 			@Override
-			public void onFailure() {
+			public void onFailure(int error) {
 				Log.i(TAG, "onFailure()");
+
+				if (error == Device.ERROR_PLTHUB_NOT_AVAILABLE) {
+					Log.i(TAG, "PLTHub was not found.");
+				} else if (error == Device.ERROR_FAILED_GET_DEVICE_LIST) {
+					Log.i(TAG, "Failed to get device list.");
+				}
 			}
 		});
 	}
@@ -141,25 +147,25 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		else {
 			Log.i(TAG, "No paired PLT devices found!");
 
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					AlertDialog.Builder builder = new AlertDialog.Builder(_context);
-					builder.setCancelable(true);
-					builder.setTitle("No Paired Devices");
-					builder.setMessage("Please pair a device in the Settings app.");
-					builder.setPositiveButton("OK",
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							});
-
-					_noPairedDevicesAlert = builder.create();
-					_noPairedDevicesAlert.show();
-				}
-			});
+//			runOnUiThread(new Runnable() {
+//				@Override
+//				public void run() {
+//					AlertDialog.Builder builder = new AlertDialog.Builder(_context);
+//					builder.setCancelable(true);
+//					builder.setTitle("No Paired Devices");
+//					builder.setMessage("Please pair a device in the Settings app.");
+//					builder.setPositiveButton("OK",
+//							new DialogInterface.OnClickListener() {
+//								@Override
+//								public void onClick(DialogInterface dialog, int which) {
+//									dialog.dismiss();
+//								}
+//							});
+//
+//					_noPairedDevicesAlert = builder.create();
+//					_noPairedDevicesAlert.show();
+//				}
+//			});
 		}
 	}
 
@@ -199,7 +205,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		// subscribe to all services
 		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, 200);
+		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, 100);
 		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
 		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
 		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
@@ -209,6 +215,14 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
 
 		calOrientationButton();
+	}
+
+	public void onConnectionFailedToOpen(Device device, int error) {
+		Log.i(TAG, "onConnectionFailedToOpen()");
+
+		if (error == Device.ERROR_CONNECTION_TIMEOUT) {
+			Log.i(TAG, "Open connection timed out.");
+		}
 	}
 
 	public void onConnectionClosed(Device device) {
