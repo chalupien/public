@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.plantronics.device.*;
+import com.plantronics.device.calibration.OrientationTrackingCalibration;
 import com.plantronics.device.info.*;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private TextView		_magnetometerCalValueTextView;
 	private TextView		_gyroscopeCalValueTextView;
 	private Button			_calOrientationButton;
+	private OrientationTrackingInfo _someSavedOrientationTrackingInfo;
 
 
 	/* ****************************************************************************************************
@@ -172,6 +174,11 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private void calOrientationButton() {
 		// "zero" orientation tracking at current orientation
 		_device.setCalibration(null, Device.SERVICE_ORIENTATION_TRACKING);
+
+
+		OrientationTrackingInfo calOrientation = this._someSavedOrientationTrackingInfo;
+		OrientationTrackingCalibration calibration = new OrientationTrackingCalibration(calOrientation);
+		_device.setCalibration(calibration, Device.SERVICE_ORIENTATION_TRACKING);
 	}
 
 	/* ****************************************************************************************************
@@ -204,8 +211,8 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		});
 
 		// subscribe to all services
-		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, 100);
+		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
+		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, 100);
 		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
 		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
 		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
