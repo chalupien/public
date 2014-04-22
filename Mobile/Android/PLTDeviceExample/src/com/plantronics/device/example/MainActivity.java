@@ -271,9 +271,9 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 					// heading uses the "right-hand" rule. http://en.wikipedia.org/wiki/Right-hand_rule
 					// most people find it more intuitive if the angle increases when rotated in the opposite direction
-					_headingValueTextView.setText(heading + "˚");
-					_pitchValueTextView.setText(pitch + "˚");
-					_rollValueTextView.setText(roll + "˚");
+					_headingValueTextView.setText(heading + "°");
+					_pitchValueTextView.setText(pitch + "°");
+					_rollValueTextView.setText(roll + "°");
 
 				}
 				else if (info.getClass() == WearingStateInfo.class) {
