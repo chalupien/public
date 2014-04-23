@@ -116,6 +116,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		_context = this;
 
+		// OPTIONAL: If your activity's onPause() called Device.onPause() stop receiving subscribed info while inactive, call Device.onRusume() here to resume subscribed info.
 		if (_device != null) {
 			_device.onResume();
 		}
@@ -128,6 +129,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		_context = null;
 
+		// OPTIONAL: If your activity doesnt want to receive subscribed info while inactive, call Device.onPause().
 		if (_device != null) {
 			_device.onPause();
 		}
