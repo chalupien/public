@@ -176,11 +176,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private void calOrientationButton() {
 		// "zero" orientation tracking at current orientation
 		_device.setCalibration(null, Device.SERVICE_ORIENTATION_TRACKING);
-
-
-		OrientationTrackingInfo calOrientation = this._someSavedOrientationTrackingInfo;
-		OrientationTrackingCalibration calibration = new OrientationTrackingCalibration(calOrientation);
-		_device.setCalibration(calibration, Device.SERVICE_ORIENTATION_TRACKING);
 	}
 
 	/* ****************************************************************************************************
@@ -237,6 +232,8 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	public void onConnectionClosed(Device device) {
 		Log.i(TAG, "onConnectionClosed()");
 
+		_device = null;
+
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
@@ -285,6 +282,7 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 				else if (info.getClass() == ProximityInfo.class) {
 					ProximityInfo theInfo = (ProximityInfo)info;
 					_localProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getLocalProximity()));
+					_remoteProximityValueTextView.setText(ProximityInfo.getStringForProximity(theInfo.getRemoteProximity()));
 				}
 				else if (info.getClass() == TapsInfo.class) {
 					TapsInfo theInfo = (TapsInfo)info;
