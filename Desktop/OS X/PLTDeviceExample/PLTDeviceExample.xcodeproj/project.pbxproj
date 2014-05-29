@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		42FEA6A81937052500B735E9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6A71937052500B735E9 /* Cocoa.framework */; };
+		42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6B01937052500B735E9 /* InfoPlist.strings */; };
+		42FEA6B41937052500B735E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6B31937052500B735E9 /* main.m */; };
+		42FEA6B81937052500B735E9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6B61937052500B735E9 /* Credits.rtf */; };
+		42FEA6BB1937052500B735E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6BA1937052500B735E9 /* AppDelegate.m */; };
+		42FEA6BE1937052500B735E9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6BC1937052500B735E9 /* MainMenu.xib */; };
+		42FEA6DE193705AB00B735E9 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6DB193705AB00B735E9 /* MainWindow.xib */; };
+		42FEA6DF193705AB00B735E9 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6DD193705AB00B735E9 /* MainWindowController.m */; };
+		42FEA6E1193705E700B735E9 /* PLTDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6E0193705E700B735E9 /* PLTDevice.framework */; };
+		42FEA6E51937073100B735E9 /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6E41937073100B735E9 /* IOBluetooth.framework */; };
+		42FEA6E7193708E000B735E9 /* PLTDevice.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6E0193705E700B735E9 /* PLTDevice.framework */; };
+		42FEA6E91937135C00B735E9 /* PLTLabsBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6E81937135C00B735E9 /* PLTLabsBanner.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42FEA6E6193708C200B735E9 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				42FEA6E7193708E000B735E9 /* PLTDevice.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		42FEA6A41937052500B735E9 /* PLTDeviceExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLTDeviceExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		42FEA6A71937052500B735E9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		42FEA6AA1937052500B735E9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		42FEA6AB1937052500B735E9 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		42FEA6AC1937052500B735E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		42FEA6AF1937052500B735E9 /* PLTDeviceExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PLTDeviceExample-Info.plist"; sourceTree = "<group>"; };
+		42FEA6B11937052500B735E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		42FEA6B31937052500B735E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		42FEA6B51937052500B735E9 /* PLTDeviceExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PLTDeviceExample-Prefix.pch"; sourceTree = "<group>"; };
+		42FEA6B71937052500B735E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		42FEA6B91937052500B735E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		42FEA6BA1937052500B735E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		42FEA6BD1937052500B735E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		42FEA6C61937052500B735E9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		42FEA6DB193705AB00B735E9 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		42FEA6DC193705AB00B735E9 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		42FEA6DD193705AB00B735E9 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		42FEA6E0193705E700B735E9 /* PLTDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PLTDevice.framework; path = Frameworks/PLTDevice.framework; sourceTree = "<group>"; };
+		42FEA6E41937073100B735E9 /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = System/Library/Frameworks/IOBluetooth.framework; sourceTree = SDKROOT; };
+		42FEA6E81937135C00B735E9 /* PLTLabsBanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PLTLabsBanner.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		42FEA6A11937052500B735E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42FEA6E51937073100B735E9 /* IOBluetooth.framework in Frameworks */,
+				42FEA6A81937052500B735E9 /* Cocoa.framework in Frameworks */,
+				42FEA6E1193705E700B735E9 /* PLTDevice.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		42FEA69B1937052500B735E9 = {
+			isa = PBXGroup;
+			children = (
+				42FEA6AD1937052500B735E9 /* PLTDeviceExample */,
+				42FEA6A61937052500B735E9 /* Frameworks */,
+				42FEA6A51937052500B735E9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		42FEA6A51937052500B735E9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6A41937052500B735E9 /* PLTDeviceExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		42FEA6A61937052500B735E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6E0193705E700B735E9 /* PLTDevice.framework */,
+				42FEA6E41937073100B735E9 /* IOBluetooth.framework */,
+				42FEA6A71937052500B735E9 /* Cocoa.framework */,
+				42FEA6C61937052500B735E9 /* XCTest.framework */,
+				42FEA6A91937052500B735E9 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		42FEA6A91937052500B735E9 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6AA1937052500B735E9 /* AppKit.framework */,
+				42FEA6AB1937052500B735E9 /* CoreData.framework */,
+				42FEA6AC1937052500B735E9 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		42FEA6AD1937052500B735E9 /* PLTDeviceExample */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6B91937052500B735E9 /* AppDelegate.h */,
+				42FEA6BA1937052500B735E9 /* AppDelegate.m */,
+				42FEA6BC1937052500B735E9 /* MainMenu.xib */,
+				42FEA6DC193705AB00B735E9 /* MainWindowController.h */,
+				42FEA6DD193705AB00B735E9 /* MainWindowController.m */,
+				42FEA6DB193705AB00B735E9 /* MainWindow.xib */,
+				42FEA6E81937135C00B735E9 /* PLTLabsBanner.png */,
+				42FEA6AE1937052500B735E9 /* Supporting Files */,
+			);
+			path = PLTDeviceExample;
+			sourceTree = "<group>";
+		};
+		42FEA6AE1937052500B735E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6AF1937052500B735E9 /* PLTDeviceExample-Info.plist */,
+				42FEA6B01937052500B735E9 /* InfoPlist.strings */,
+				42FEA6B31937052500B735E9 /* main.m */,
+				42FEA6B51937052500B735E9 /* PLTDeviceExample-Prefix.pch */,
+				42FEA6B61937052500B735E9 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42FEA6A31937052500B735E9 /* PLTDeviceExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 42FEA6D51937052500B735E9 /* Build configuration list for PBXNativeTarget "PLTDeviceExample" */;
+			buildPhases = (
+				42FEA6A01937052500B735E9 /* Sources */,
+				42FEA6A11937052500B735E9 /* Frameworks */,
+				42FEA6A21937052500B735E9 /* Resources */,
+				42FEA6E6193708C200B735E9 /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PLTDeviceExample;
+			productName = PLTDeviceExample;
+			productReference = 42FEA6A41937052500B735E9 /* PLTDeviceExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		42FEA69C1937052500B735E9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Plantronics;
+			};
+			buildConfigurationList = 42FEA69F1937052500B735E9 /* Build configuration list for PBXProject "PLTDeviceExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 42FEA69B1937052500B735E9;
+			productRefGroup = 42FEA6A51937052500B735E9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42FEA6A31937052500B735E9 /* PLTDeviceExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		42FEA6A21937052500B735E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */,
+				42FEA6DE193705AB00B735E9 /* MainWindow.xib in Resources */,
+				42FEA6B81937052500B735E9 /* Credits.rtf in Resources */,
+				42FEA6BE1937052500B735E9 /* MainMenu.xib in Resources */,
+				42FEA6E91937135C00B735E9 /* PLTLabsBanner.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		42FEA6A01937052500B735E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42FEA6DF193705AB00B735E9 /* MainWindowController.m in Sources */,
+				42FEA6BB1937052500B735E9 /* AppDelegate.m in Sources */,
+				42FEA6B41937052500B735E9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		42FEA6B01937052500B735E9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42FEA6B11937052500B735E9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		42FEA6B61937052500B735E9 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42FEA6B71937052500B735E9 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		42FEA6BC1937052500B735E9 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				42FEA6BD1937052500B735E9 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		42FEA6D31937052500B735E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		42FEA6D41937052500B735E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		42FEA6D61937052500B735E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PLTDeviceExample/PLTDeviceExample-Prefix.pch";
+				INFOPLIST_FILE = "PLTDeviceExample/PLTDeviceExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		42FEA6D71937052500B735E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PLTDeviceExample/PLTDeviceExample-Prefix.pch";
+				INFOPLIST_FILE = "PLTDeviceExample/PLTDeviceExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		42FEA69F1937052500B735E9 /* Build configuration list for PBXProject "PLTDeviceExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42FEA6D31937052500B735E9 /* Debug */,
+				42FEA6D41937052500B735E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		42FEA6D51937052500B735E9 /* Build configuration list for PBXNativeTarget "PLTDeviceExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42FEA6D61937052500B735E9 /* Debug */,
+				42FEA6D71937052500B735E9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 42FEA69C1937052500B735E9 /* Project object */;
+}
