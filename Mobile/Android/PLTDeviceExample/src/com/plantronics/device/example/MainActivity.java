@@ -116,7 +116,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		_context = this;
 
-		// OPTIONAL: If your activity's onPause() called Device.onPause() stop receiving subscribed info while inactive, call Device.onRusume() here to resume subscribed info.
 		if (_device != null) {
 			_device.onResume();
 		}
@@ -129,7 +128,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		_context = null;
 
-		// OPTIONAL: If your activity doesnt want to receive subscribed info while inactive, call Device.onPause().
 		if (_device != null) {
 			_device.onPause();
 		}
@@ -208,15 +206,15 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		});
 
 		// subscribe to all services
-		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, 100);
-		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_PEDOMETER, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_FREE_FALL, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_MAGNETOMETER_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
-		_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, 0);
+		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, (short)100);
+		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_PEDOMETER, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_FREE_FALL, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_MAGNETOMETER_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
 
 		calOrientationButton();
 	}
@@ -287,8 +285,8 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 				else if (info.getClass() == TapsInfo.class) {
 					TapsInfo theInfo = (TapsInfo)info;
 					int count = theInfo.getCount();
-					String tapss = (count > 1 ? " taps " : " tap ");
-					_tapsValueTextView.setText((count == 0 ? "-" : count + tapss + "in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
+					String tapss = (count > 1 ? " taps" : " tap");
+					_tapsValueTextView.setText((count == 0 ? "-" : count + tapss + " in " + TapsInfo.getStringForTapDirection(theInfo.getDirection())));
 				}
 				else if (info.getClass() == PedometerInfo.class) {
 					PedometerInfo theInfo = (PedometerInfo)info;
