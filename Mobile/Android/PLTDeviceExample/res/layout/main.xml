@@ -154,7 +154,7 @@
             android:layout_centerInParent="true"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Calibrate" />
+            android:text="Calibrate Orientation" />
 
         <LinearLayout
             android:id="@+id/wearingStateLinearLayout"
@@ -172,7 +172,7 @@
                 android:textSize="8pt"
                 android:textStyle="bold"
                 android:textColor="@color/blackish"
-                android:text="Wearing?" />
+                android:text="Wearing" />
 
             <TextView
                 android:id="@+id/wearingStateValueTextView"
@@ -322,7 +322,7 @@
                 android:textSize="8pt"
                 android:textStyle="bold"
                 android:textColor="@color/blackish"
-                android:text="Free Fall?" />
+                android:text="Free Fall" />
 
             <TextView
                 android:id="@+id/freeFallValueTextView"
@@ -352,7 +352,7 @@
                 android:textSize="8pt"
                 android:textStyle="bold"
                 android:textColor="@color/blackish"
-                android:text="Magnetometer Calibrated?" />
+                android:text="Magnetometer Calibrated" />
 
             <TextView
                 android:id="@+id/magnetometerCalValueTextView"
@@ -382,7 +382,7 @@
                 android:textSize="8pt"
                 android:textStyle="bold"
                 android:textColor="@color/blackish"
-                android:text="Gyroscope Calibrated?" />
+                android:text="Gyroscope Calibrated" />
 
             <TextView
                 android:id="@+id/gyroscopeCalValueTextView"
