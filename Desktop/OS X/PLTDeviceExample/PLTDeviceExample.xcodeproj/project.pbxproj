@@ -10,7 +10,6 @@
 		42FEA6A81937052500B735E9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6A71937052500B735E9 /* Cocoa.framework */; };
 		42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6B01937052500B735E9 /* InfoPlist.strings */; };
 		42FEA6B41937052500B735E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6B31937052500B735E9 /* main.m */; };
-		42FEA6B81937052500B735E9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6B61937052500B735E9 /* Credits.rtf */; };
 		42FEA6BB1937052500B735E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6BA1937052500B735E9 /* AppDelegate.m */; };
 		42FEA6BE1937052500B735E9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6BC1937052500B735E9 /* MainMenu.xib */; };
 		42FEA6DE193705AB00B735E9 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6DB193705AB00B735E9 /* MainWindow.xib */; };
@@ -45,7 +44,6 @@
 		42FEA6B11937052500B735E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		42FEA6B31937052500B735E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		42FEA6B51937052500B735E9 /* PLTDeviceExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PLTDeviceExample-Prefix.pch"; sourceTree = "<group>"; };
-		42FEA6B71937052500B735E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		42FEA6B91937052500B735E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		42FEA6BA1937052500B735E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		42FEA6BD1937052500B735E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				42FEA6B01937052500B735E9 /* InfoPlist.strings */,
 				42FEA6B31937052500B735E9 /* main.m */,
 				42FEA6B51937052500B735E9 /* PLTDeviceExample-Prefix.pch */,
-				42FEA6B61937052500B735E9 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -193,7 +190,6 @@
 			files = (
 				42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */,
 				42FEA6DE193705AB00B735E9 /* MainWindow.xib in Resources */,
-				42FEA6B81937052500B735E9 /* Credits.rtf in Resources */,
 				42FEA6BE1937052500B735E9 /* MainMenu.xib in Resources */,
 				42FEA6E91937135C00B735E9 /* PLTLabsBanner.png in Resources */,
 			);
@@ -221,14 +217,6 @@
 				42FEA6B11937052500B735E9 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		42FEA6B61937052500B735E9 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				42FEA6B71937052500B735E9 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		42FEA6BC1937052500B735E9 /* MainMenu.xib */ = {
@@ -324,6 +312,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLTDeviceExample/PLTDeviceExample-Prefix.pch";
 				INFOPLIST_FILE = "PLTDeviceExample/PLTDeviceExample-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -341,6 +330,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLTDeviceExample/PLTDeviceExample-Prefix.pch";
 				INFOPLIST_FILE = "PLTDeviceExample/PLTDeviceExample-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -365,6 +355,7 @@
 				42FEA6D71937052500B735E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

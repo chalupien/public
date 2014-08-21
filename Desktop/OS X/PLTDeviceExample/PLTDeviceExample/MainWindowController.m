@@ -49,6 +49,7 @@
 	[self.calibrateButton setEnabled:flag];
 	
 	if (!flag) {
+		self.connectedTextField.stringValue = @"no";
 		[self.headingIndicator setDoubleValue:-180];
 		[self.pitchIndicator setDoubleValue:-90];
 		[self.rollIndicator setDoubleValue:-90];
@@ -61,6 +62,9 @@
 		self.gyroCalTextField.stringValue = @"-";;
 		self.magnoCalTextField.stringValue = @"-";
 	}
+	else {
+		self.connectedTextField.stringValue = @"yes";
+	}
 }
 
 #pragma mark - PLTDeviceSubscriber
@@ -71,7 +75,7 @@
 	
 	if ([theInfo isKindOfClass:[PLTWearingStateInfo class]]) {
         PLTWearingStateInfo *i = (PLTWearingStateInfo *)theInfo;
-        self.wearingStateTextField.stringValue = (i.isBeingWorn ? @"Yes" : @"No");
+        self.wearingStateTextField.stringValue = (i.isBeingWorn ? @"yes" : @"no");
     }
     else if ([theInfo isKindOfClass:[PLTProximityInfo class]]) {
         PLTProximityInfo *i = (PLTProximityInfo *)theInfo;
@@ -92,7 +96,7 @@
     }
     else if ([theInfo isKindOfClass:[PLTFreeFallInfo class]]) {
         PLTFreeFallInfo *i = (PLTFreeFallInfo *)theInfo;
-        self.freeFallTextField.stringValue = (i.isInFreeFall ? @"Yes" : @"No");
+        self.freeFallTextField.stringValue = (i.isInFreeFall ? @"yes" : @"no");
     }
     else if ([theInfo isKindOfClass:[PLTPedometerInfo class]]) {
         PLTPedometerInfo *i = (PLTPedometerInfo *)theInfo;
@@ -100,11 +104,11 @@
     }
     else if ([theInfo isKindOfClass:[PLTGyroscopeCalibrationInfo class]]) {
         PLTGyroscopeCalibrationInfo *i = (PLTGyroscopeCalibrationInfo *)theInfo;
-        self.gyroCalTextField.stringValue = (i.isCalibrated ? @"Yes" : @"No");
+        self.gyroCalTextField.stringValue = (i.isCalibrated ? @"yes" : @"no");
     }
 	else if ([theInfo isKindOfClass:[PLTMagnetometerCalibrationInfo class]]) {
         PLTMagnetometerCalibrationInfo *i = (PLTMagnetometerCalibrationInfo *)theInfo;
-        self.magnoCalTextField.stringValue = (i.isCalibrated ? @"Yes" : @"No");
+        self.magnoCalTextField.stringValue = (i.isCalibrated ? @"yes" : @"no");
     }
 }
 
@@ -143,13 +147,13 @@
 			 
 			 [self.device subscribe:self toService:PLTServiceOrientationTracking			withMode:PLTSubscriptionModeOnChange	andPeriod:0];
 			 [self.device setCalibration:nil forService:PLTServiceOrientationTracking];
-			 [self.device subscribe:self toService:PLTServiceWearingState				withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServiceProximity					withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServicePedometer					withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServiceFreeFall					withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServiceTaps						withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServiceMagnetometerCalStatus		withMode:PLTSubscriptionModeOnChange	andPeriod:0];
-			 [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus	withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceWearingState					withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceProximity						withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServicePedometer						withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceFreeFall						withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceTaps							withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceMagnetometerCalibrationStatus	withMode:PLTSubscriptionModeOnChange	andPeriod:0];
+			 [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus		withMode:PLTSubscriptionModeOnChange	andPeriod:0];
 			 
 		 }];
 		
