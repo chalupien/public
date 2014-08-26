@@ -2,7 +2,7 @@
 //  PLTGyroscopeCalibrationInfo
 //  PLTDevice
 //
-//  Created by Davis, Morgan on 9/10/13.
+//  Created by Morgan Davis on 9/10/13.
 //  Copyright (c) 2013 Plantronics, Inc. All rights reserved.
 //
 
@@ -11,6 +11,6 @@
 
 @interface PLTGyroscopeCalibrationInfo : PLTInfo
 
-@property(readonly)	BOOL	isCalibrated;
+@property(nonatomic,readonly)	BOOL	isCalibrated;
 
 @end

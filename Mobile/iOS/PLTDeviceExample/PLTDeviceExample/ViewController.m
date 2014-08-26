@@ -13,39 +13,29 @@
 #define DEVICE_IPAD         ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 
 
-@interface ViewController () <PLTDeviceInfoObserver>
+@interface ViewController () <PLTDeviceSubscriber>
 
-- (void)subscribeToInfo;
-- (void)startFreeFallResetTimer;
-- (void)stopFreeFallResetTimer;
-- (void)freeFallResetTimer:(NSTimer *)theTimer;
-- (void)startTapsResetTimer;
-- (void)stopTapsResetTimer;
-- (void)tapsResetTimer:(NSTimer *)theTimer;
-- (IBAction)calibrateOrientationButton:(id)sender;
-- (void)registerForDeviceNotifications;
-- (void)newDeviceAvailableNotification:(NSNotification *)notification;
-- (void)didOpenDeviceConnectionNotification:(NSNotification *)notification;
-- (void)didFailToOpenDeviceConnectionNotification:(NSNotification *)notification;
-- (void)deviceDidDisconnectNotification:(NSNotification *)notification;
+- (IBAction)calibrateButton:(id)sender;
+- (void)setUIConnected:(BOOL)flag;
 
-@property(nonatomic, strong)	PLTDevice                 *device;
-@property(nonatomic, strong)	NSTimer                   *freeFallResetTimer;
-@property(nonatomic, strong)	NSTimer                   *tapsResetTimer;
-@property(nonatomic, strong)	IBOutlet UIProgressView   *headingProgressView;
-@property(nonatomic, strong)	IBOutlet UIProgressView   *pitchProgressView;
-@property(nonatomic, strong)	IBOutlet UIProgressView   *rollProgressView;
-@property(nonatomic, strong)	IBOutlet UILabel          *headingLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *pitchLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *rollLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *wearingStateLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *mobileProximityLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *pcProximityLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *tapsLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *pedometerLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *freeFallLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *magnetometerCalLabel;
-@property(nonatomic, strong)	IBOutlet UILabel          *gyroscopeCalLabel;
+@property(nonatomic,strong)	  PLTDevice				*device;
+@property(nonatomic,strong)	  NSTimer					*freeFallResetTimer;
+@property(nonatomic,strong)	  NSTimer					*tapsResetTimer;
+@property(nonatomic,strong)	  IBOutlet UIButton			*calibrateButton;
+@property(nonatomic,strong)	  IBOutlet UIProgressView	*headingProgressView;
+@property(nonatomic,strong)	  IBOutlet UIProgressView	*pitchProgressView;
+@property(nonatomic,strong)	  IBOutlet UIProgressView	*rollProgressView;
+@property(nonatomic,strong)	  IBOutlet UILabel			*headingLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*pitchLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*rollLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*wearingStateLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*localProximityLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*remoteProximityLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*tapsLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*pedometerLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*freeFallLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*magnetometerCalLabel;
+@property(nonatomic,strong)	  IBOutlet UILabel			*gyroscopeCalLabel;
 
 @end
 
@@ -54,182 +44,82 @@
 
 #pragma mark - Private
 
-- (void)subscribeToInfo
+- (IBAction)calibrateButton:(id)sender
 {
-    // lets PLTDevice know what information we're interested in receiving.
+    // "zero" orientation tracking to current position
+    NSError *err = nil;
+    [self.device setCalibration:nil forService:PLTServiceOrientationTracking error:&err];
+    if (err) {
+	   NSLog(@"Error calibrating orientation tracking: %@", err);
+    }
     
-    NSError *err = [self.device subscribe:self toService:PLTServiceOrientationTracking withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceWearingState withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceProximity withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServicePedometer withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceFreeFall withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceTaps withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceMagnetometerCalStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
-    
-    err = [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus withMode:PLTSubscriptionModeOnChange minPeriod:0];
-    if (err) NSLog(@"Error: %@", err);
+    // the above is equivelent to:
+    // PLTOrientationTrackingInfo *oldOrientationInfo = (PLTOrientationTrackingInfo *)[self.device cachedInfoForService:PLTServiceOrientationTracking error:nil];
+    // PLTOrientationTrackingCalibration *orientationCal = [PLTOrientationTrackingCalibration calibrationWithReferenceOrientationTrackingInfo:oldOrientationInfo];
+    // [self.device setCalibration:orientationCal forService:PLTServiceOrientationTracking error:&err];
 }
 
-- (void)startFreeFallResetTimer
+- (void)setUIConnected:(BOOL)flag
 {
-	// currrently free fall is only reported as info indicating isInFreeFall, immediately followed by info indicating !isInFreeFall (during is not yet supported)
-	// so to make sure the user sees a visual indication of the device having been in/is in free fall, a timer is used to display "Free Fall? yes" for three seconds.
-	
-	[self stopFreeFallResetTimer];
-	self.freeFallResetTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(freeFallResetTimer:) userInfo:nil repeats:NO];
-}
-
-- (void)stopFreeFallResetTimer
-{
-	if ([self.freeFallResetTimer isValid]) {
-		[self.freeFallResetTimer invalidate];
-		self.freeFallResetTimer = nil;
-	}
-}
-
-- (void)freeFallResetTimer:(NSTimer *)theTimer
-{
-	self.freeFallLabel.text = @"no";
-}
-
-- (void)startTapsResetTimer
-{
-	// since taps are only reported in one brief info update, a timer is used to display the most recent taps for three seconds.
-	
-	[self stopTapsResetTimer];
-	self.tapsResetTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tapsResetTimer:) userInfo:nil repeats:NO];
-}
-
-- (void)stopTapsResetTimer
-{
-	if ([self.tapsResetTimer isValid]) {
-		[self.tapsResetTimer invalidate];
-		self.tapsResetTimer = nil;
-	}
-}
-
-- (void)tapsResetTimer:(NSTimer *)theTimer
-{
-	self.tapsLabel.text = @"-";
-}
-
-- (IBAction)calibrateOrientationButton:(id)sender
-{
-	// zero's orientation tracking
-	[self.device setCalibration:nil forService:PLTServiceOrientationTracking];
-}
-
-- (void)registerForDeviceNotifications
-{
-    // since PLTDevice lets us know when connection-related events occur via NSNotifications, we must register to receive them.
+    [self.calibrateButton setEnabled:flag];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(newDeviceAvailableNotification:)
-                                                 name:PLTNewDeviceAvailableNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didOpenDeviceConnectionNotification:)
-                                                 name:PLTDidOpenDeviceConnectionNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didFailToOpenDeviceConnectionNotification:)
-                                                 name:PLTDidFailToOpenDeviceConnectionNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(deviceDidDisconnectNotification:)
-                                                 name:PLTDeviceDidDisconnectNotification object:nil];
-}
-
-- (void)newDeviceAvailableNotification:(NSNotification *)notification
-{
-    // a new device has been detected. if we don't already have an open connection to another device, open a connection with the new device.
-    
-    NSLog(@"newDeviceAvailableNotification: %@", notification);
-    
-    if (!self.device) {
-        self.device = notification.userInfo[PLTDeviceNotificationKey];
-        [self.device openConnection];
+    if (!flag) {
+	   self.headingProgressView.progress = 0;
+	   self.pitchProgressView.progress = 0;
+	   self.rollProgressView.progress = 0;
+	   self.headingLabel.text = @"0˚";
+	   self.pitchLabel.text = @"0˚";
+	   self.rollLabel.text = @"0˚";
+	   self.localProximityLabel.text = @"-";
+	   self.localProximityLabel.text = @"-";
+	   self.wearingStateLabel.text = @"-";
+	   self.tapsLabel.text = @"-";
+	   self.freeFallLabel.text = @"-";
+	   self.pedometerLabel.text = @"-";
+	   self.gyroscopeCalLabel.text = @"-";;
+	   self.magnetometerCalLabel.text = @"-";
     }
 }
 
-- (void)didOpenDeviceConnectionNotification:(NSNotification *)notification
-{
-    // now that a connection to the device had been established, let PTLDevice know what info we're interested in receiving.
-    
-    NSLog(@"didOpenDeviceConnectionNotification: %@", notification.userInfo[PLTDeviceNotificationKey]);
-    
-    [self subscribeToInfo];
-}
-
-- (void)didFailToOpenDeviceConnectionNotification:(NSNotification *)notification
-{
-    NSLog(@"didFailToOpenDeviceConnectionNotification: %@ error: %@", 
-          notification.userInfo[PLTDeviceNotificationKey], notification.userInfo[PLTConnectionErrorNotificationKey]);
-    
-    self.device = nil;
-}
-
-- (void)deviceDidDisconnectNotification:(NSNotification *)notification
-{
-    NSLog(@"deviceDidDisconnectNotification: %@", notification.userInfo[PLTDeviceNotificationKey]);
-    
-    self.device = nil;
-}
-
-#pragma mark - PLTDeviceInfoObserver
+#pragma mark - PLTDeviceSubscriber
 
 - (void)PLTDevice:(PLTDevice *)aDevice didUpdateInfo:(PLTInfo *)theInfo
 {
     // since we subscribed to receive info updates (and conform to the PLTDeviceInfoObserver protocol), this method is called when new device info is available.
     // we must check the info's 'class' to see which subclass of PLTInfo it is.
     
-    NSLog(@"PLTDevice: %@ didUpdateInfo: %@", aDevice, theInfo);
+    //NSLog(@"PLTDevice: %@ didUpdateInfo: %@", aDevice, theInfo);
     
     if ([theInfo isKindOfClass:[PLTOrientationTrackingInfo class]]) {
         PLTEulerAngles eulerAngles = ((PLTOrientationTrackingInfo *)theInfo).eulerAngles;
-        self.headingLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.x)];
+        
         [self.headingProgressView setProgress:(eulerAngles.x + 180.0)/360.0 animated:YES];
-        self.pitchLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.y)];
-        [self.pitchProgressView setProgress:(eulerAngles.y + 180.0)/360.0 animated:YES];
-        self.rollLabel.text = [NSString stringWithFormat:@"%ldº", lroundf(eulerAngles.z)];
+        [self.pitchProgressView setProgress:(eulerAngles.y + 90.0)/180.0 animated:YES];
         [self.rollProgressView setProgress:(eulerAngles.z + 180.0)/360.0 animated:YES];
+	   
+	   self.headingLabel.text = [NSString stringWithFormat:@"%ld˚", lroundf(eulerAngles.x)];
+	   self.pitchLabel.text = [NSString stringWithFormat:@"%ld˚", lroundf(eulerAngles.y)];
+	   self.rollLabel.text = [NSString stringWithFormat:@"%ld˚", lroundf(eulerAngles.z)];
     }
     else if ([theInfo isKindOfClass:[PLTWearingStateInfo class]]) {
         self.wearingStateLabel.text = (((PLTWearingStateInfo *)theInfo).isBeingWorn ? @"yes" : @"no");
     }
     else if ([theInfo isKindOfClass:[PLTProximityInfo class]]) {
         PLTProximityInfo *proximityInfp = (PLTProximityInfo *)theInfo;
-        self.mobileProximityLabel.text = NSStringFromProximity(proximityInfp.mobileProximity);
-        self.pcProximityLabel.text = NSStringFromProximity(proximityInfp.pcProximity);
+        self.localProximityLabel.text = NSStringFromProximity(proximityInfp.localProximity);
+        self.remoteProximityLabel.text = NSStringFromProximity(proximityInfp.remoteProximity);
     }
     else if ([theInfo isKindOfClass:[PLTPedometerInfo class]]) {
-        self.pedometerLabel.text = [NSString stringWithFormat:@"%u", ((PLTPedometerInfo *)theInfo).steps];
+        self.pedometerLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)((PLTPedometerInfo *)theInfo).steps];
     }
     else if ([theInfo isKindOfClass:[PLTFreeFallInfo class]]) {
         BOOL isInFreeFall = ((PLTFreeFallInfo *)theInfo).isInFreeFall;
-        if (isInFreeFall) {
-            self.freeFallLabel.text = (isInFreeFall ? @"yes" : @"no");
-            [self startFreeFallResetTimer];
-        }
+	   self.freeFallLabel.text = (isInFreeFall ? @"yes" : @"no");
     }
     else if ([theInfo isKindOfClass:[PLTTapsInfo class]]) {
         PLTTapsInfo *tapsInfo = (PLTTapsInfo *)theInfo;
         NSString *directionString = NSStringFromTapDirection(tapsInfo.direction);
-        self.tapsLabel.text = [NSString stringWithFormat:@"%u in %@", tapsInfo.taps, directionString];
-        [self startTapsResetTimer];
+        self.tapsLabel.text = [NSString stringWithFormat:@"%lu in %@", (unsigned long)tapsInfo.count, directionString];
     }
     else if ([theInfo isKindOfClass:[PLTMagnetometerCalibrationInfo class]]) {
         self.magnetometerCalLabel.text = (((PLTMagnetometerCalibrationInfo *)theInfo).isCalibrated ? @"yes" : @"no");
@@ -239,26 +129,119 @@
     }
 }
 
+- (void)PLTDevice:(PLTDevice *)aDevice didChangeSubscription:(PLTSubscription *)oldSubscription toSubscription:(PLTSubscription *)newSubscription
+{
+    NSLog(@"PLTDevice: %@, didChangeSubscription: %@, toSubscription: %@", self, oldSubscription, newSubscription);
+}
+
 #pragma mark - UIViewContorller
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     if (DEVICE_IPAD) self = [super initWithNibName:@"ViewController_iPad" bundle:nil];
     else self = [super initWithNibName:@"ViewController_iPhone" bundle:nil];
+    
+    // register for device connectivity-related notifications
+    
+    // connection open
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceDidOpenConnectionNotification object:nil queue:NULL usingBlock:^(NSNotification *note) {
+	   NSLog(@"Device conncetion open: %@", (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]));
+	   
+	   [self setUIConnected:YES];
+	   
+	   // now that a connection is established, subscribe to all services with mode "on-change"
+	   
+	   NSError *err = nil;
+	   
+	   [self.device subscribe:self toService:PLTServiceWearingState withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to wearing state service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceProximity withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to proximity service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceOrientationTracking withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to orientation tracking state service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServicePedometer withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to pedometer service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceFreeFall withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to free fall service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceTaps withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to taps service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceMagnetometerCalibrationStatus withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to magnetometer calibration service: %@", err);
+	   
+	   [self.device subscribe:self toService:PLTServiceGyroscopeCalibrationStatus withMode:PLTSubscriptionModeOnChange andPeriod:0 error:&err];
+	   if (err) NSLog(@"Error subscribing to hyroscope calibration service: %@", err);
+	   
+	   // "zero" orientation tracking to current orientation
+	   
+	   [self.device setCalibration:nil forService:PLTServiceOrientationTracking error:&err];
+	   if (err) NSLog(@"Error calibrating orientation tracking: %@", err);
+    }];
+    
+    // connection failed
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceDidFailOpenConnectionNotification object:nil queue:NULL usingBlock:^(NSNotification *note) {
+	   PLTDevice *device = (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]);
+	   NSInteger error = [(NSNumber *)([note userInfo][PLTDeviceConnectionErrorNotificationKey]) intValue];
+	   
+	   NSLog(@"Device conncetion failed with error: %ld, device: %@", (long)error, device);
+	   
+	   self.device = nil;
+	   [self setUIConnected:NO];
+    }];
+    
+    // connection closed
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceDidCloseConnectionNotification object:nil queue:NULL usingBlock:^(NSNotification *note) {
+	   PLTDevice *device = (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]);
+	   
+	   NSLog(@"Device conncetion closed: %@", device);
+	   
+	   self.device = nil;
+	   [self setUIConnected:NO];
+    }];
+    
+    // new device available
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceAvailableNotification object:Nil queue:NULL usingBlock:^(NSNotification *note) {
+	   PLTDevice *device = (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]);
+	   
+	   NSLog(@"Device available: %@", device);
+	   
+	   // if we're not already connected to a device, connect to this one.
+	   
+	   if (!self.device) {
+	   NSLog(@"Opening connection to %@...", device);
+		  self.device = device;
+		  NSError *err = nil;
+		  [self.device openConnection:&err];
+		  if (err) {
+			 NSLog(@"Error opening connection: %@", err);
+		  }
+	   }
+    }];
+    
     return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // let PLTDevice know that we're interested in receiving notifications about device connectivity.
-    // then, see if any devices are available and if so, connect to the first one.
+    [super viewWillAppear:animated];
     
-    [self registerForDeviceNotifications];
+    [self setUIConnected:NO];
+    
+    // check to see if there are any devices currently avaialble to conenct to
     
     NSArray *devices = [PLTDevice availableDevices];
     if ([devices count]) {
         self.device = devices[0];
-        [self.device openConnection];
+	   NSError *err = nil;
+	   [self.device openConnection:&err];
+	   if (err) {
+		  NSLog(@"Error opening connection: %@", err);
+	   }
     }
     else {
         NSLog(@"No available devices.");

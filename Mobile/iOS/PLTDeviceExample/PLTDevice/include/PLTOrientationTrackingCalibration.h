@@ -2,7 +2,7 @@
 //  PLTOrientationTrackingCalibration.h
 //  PLTDevice
 //
-//  Created by Davis, Morgan on 9/10/13.
+//  Created by Morgan Davis on 9/10/13.
 //  Copyright (c) 2013 Plantronics, Inc. All rights reserved.
 //
 
@@ -12,10 +12,11 @@
 
 @interface PLTOrientationTrackingCalibration : PLTCalibration
 
++ (PLTOrientationTrackingCalibration *)calibrationWithReferenceOrientationTrackingInfo:(PLTOrientationTrackingInfo *)info;
 + (PLTOrientationTrackingCalibration *)calibrationWithReferenceEulerAngles:(PLTEulerAngles)referenceEulerAngles;
 + (PLTOrientationTrackingCalibration *)calibrationWithReferenceQuaternion:(PLTQuaternion)referenceQuaternion;
 
-@property(nonatomic, assign)	PLTEulerAngles	referenceEulerAngles;
-@property(nonatomic, assign)	PLTQuaternion	referenceQuaternion;
+@property(nonatomic,assign)	PLTEulerAngles	referenceEulerAngles;
+@property(nonatomic,assign)	PLTQuaternion	referenceQuaternion;
 
 @end

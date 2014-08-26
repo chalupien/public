@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>89AC83DD-8B15-4AA3-BBB3-CA051007AE33</string>
+	<string>5D8EB4EF-94E1-4C8D-BDFD-9E8A56571B2E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>PLTDeviceExample</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9E2AA8E5-4F74-473F-82B3-BEA8ED1EFE41</key>
+		<key>E60E8B435878AD9B33B732C4E9F4A09AC4B2B779</key>
 		<string>https://github.com/plantronics-innovation/public.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PLTDeviceExample/PLTDeviceExample.xcodeproj/project.xcworkspace</string>
+	<string>Mobile/iOS/PLTDeviceExample/PLTDeviceExample.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9E2AA8E5-4F74-473F-82B3-BEA8ED1EFE41</key>
-		<string>../../..</string>
+		<key>E60E8B435878AD9B33B732C4E9F4A09AC4B2B779</key>
+		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/plantronics-innovation/public.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9E2AA8E5-4F74-473F-82B3-BEA8ED1EFE41</string>
+	<string>E60E8B435878AD9B33B732C4E9F4A09AC4B2B779</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9E2AA8E5-4F74-473F-82B3-BEA8ED1EFE41</string>
+			<string>E60E8B435878AD9B33B732C4E9F4A09AC4B2B779</string>
 			<key>IDESourceControlWCCName</key>
 			<string>public</string>
 		</dict>

@@ -2,14 +2,14 @@
 //  PLTTapsInfo.h
 //  PLTDevice
 //
-//  Created by Davis, Morgan on 9/10/13.
+//  Created by Morgan Davis on 9/10/13.
 //  Copyright (c) 2013 Plantronics, Inc. All rights reserved.
 //
 
 #import "PLTInfo.h"
 
 
-typedef NS_ENUM(NSUInteger, PLTTapDirection) {
+typedef NS_ENUM(uint8_t, PLTTapDirection) {
     PLTTapDirectionXUp = 1,
     PLTTapDirectionXDown,
     PLTTapDirectionYUp,
@@ -24,7 +24,7 @@ NSString *NSStringFromTapDirection(PLTTapDirection direction);
 
 @interface PLTTapsInfo : PLTInfo
 
-@property(readonly)	NSUInteger		taps;
-@property(readonly)	PLTTapDirection	direction;
+@property(nonatomic,readonly)	PLTTapDirection	direction;
+@property(nonatomic,readonly)	NSUInteger		count;
 
 @end

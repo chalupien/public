@@ -2,7 +2,7 @@
 //  PLTProximityInfo.h
 //  PLTDevice
 //
-//  Created by Davis, Morgan on 9/10/13.
+//  Created by Morgan Davis on 9/10/13.
 //  Copyright (c) 2013 Plantronics, Inc. All rights reserved.
 //
 
@@ -21,7 +21,7 @@ NSString *NSStringFromProximity(PLTProximity proximity);
 
 @interface PLTProximityInfo : PLTInfo
 
-@property(readonly)	PLTProximity	pcProximity;
-@property(readonly)	PLTProximity	mobileProximity;
+@property(nonatomic,readonly)	PLTProximity	localProximity;
+@property(nonatomic,readonly)	PLTProximity	remoteProximity;
 
 @end

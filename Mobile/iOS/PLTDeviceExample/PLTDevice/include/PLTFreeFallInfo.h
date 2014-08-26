@@ -2,7 +2,7 @@
 //  PLTFreeFallInfo.h
 //  PLTDevice
 //
-//  Created by Davis, Morgan on 9/10/13.
+//  Created by Morgan Davis on 9/10/13.
 //  Copyright (c) 2013 Plantronics, Inc. All rights reserved.
 //
 
@@ -11,6 +11,6 @@
 
 @interface PLTFreeFallInfo : PLTInfo
 
-@property(readonly)	BOOL	isInFreeFall;
+@property(nonatomic,readonly)	BOOL	isInFreeFall;
 
 @end
