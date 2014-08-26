@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		420C23E819A7F0120031AF57 /* PLTLabsBanner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 420C23E719A7F0120031AF57 /* PLTLabsBanner@2x.png */; };
 		42FEA6A81937052500B735E9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FEA6A71937052500B735E9 /* Cocoa.framework */; };
 		42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 42FEA6B01937052500B735E9 /* InfoPlist.strings */; };
 		42FEA6B41937052500B735E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 42FEA6B31937052500B735E9 /* main.m */; };
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		420C23E719A7F0120031AF57 /* PLTLabsBanner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PLTLabsBanner@2x.png"; sourceTree = "<group>"; };
 		42FEA6A41937052500B735E9 /* PLTDeviceExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PLTDeviceExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42FEA6A71937052500B735E9 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		42FEA6AA1937052500B735E9 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -70,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		420C23EF19A817B30031AF57 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				42FEA6E81937135C00B735E9 /* PLTLabsBanner.png */,
+				420C23E719A7F0120031AF57 /* PLTLabsBanner@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		42FEA69B1937052500B735E9 = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +129,6 @@
 				42FEA6DC193705AB00B735E9 /* MainWindowController.h */,
 				42FEA6DD193705AB00B735E9 /* MainWindowController.m */,
 				42FEA6DB193705AB00B735E9 /* MainWindow.xib */,
-				42FEA6E81937135C00B735E9 /* PLTLabsBanner.png */,
 				42FEA6AE1937052500B735E9 /* Supporting Files */,
 			);
 			path = PLTDeviceExample;
@@ -131,6 +141,7 @@
 				42FEA6B01937052500B735E9 /* InfoPlist.strings */,
 				42FEA6B31937052500B735E9 /* main.m */,
 				42FEA6B51937052500B735E9 /* PLTDeviceExample-Prefix.pch */,
+				420C23EF19A817B30031AF57 /* Images */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -190,6 +201,7 @@
 			files = (
 				42FEA6B21937052500B735E9 /* InfoPlist.strings in Resources */,
 				42FEA6DE193705AB00B735E9 /* MainWindow.xib in Resources */,
+				420C23E819A7F0120031AF57 /* PLTLabsBanner@2x.png in Resources */,
 				42FEA6BE1937052500B735E9 /* MainMenu.xib in Resources */,
 				42FEA6E91937135C00B735E9 /* PLTLabsBanner.png in Resources */,
 			);
