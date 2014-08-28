@@ -202,7 +202,7 @@ extern int _pltDLogLevel;
 		}];
 		
 		// new device available
-		[[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceAvailableNotification object:Nil queue:NULL usingBlock:^(NSNotification *note) {
+		[[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceAvailableNotification object:nil queue:NULL usingBlock:^(NSNotification *note) {
 			PLTDevice *device = (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]);
 			
 			NSLog(@"Device available: %@", device);
@@ -241,6 +241,7 @@ extern int _pltDLogLevel;
 	NSArray *devices = [PLTDevice availableDevices];
 	if ([devices count]) {
 		self.device = devices[0];
+		NSLog(@"Opening connection to %@...", self.device);
 		NSError *err = nil;
 		[self.device openConnection:&err];
 		if (err) {

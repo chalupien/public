@@ -47,8 +47,8 @@ typedef NS_ENUM(NSUInteger, PLTSubscriptionMode) {
 	PLTSubscriptionModePeriodic = 0x02
 };
 
-typedef NS_ENUM(NSInteger, PLTDeviceErrorCode) {
-	PLTDeviceErrorCodeUnknownError =                1,
+typedef NS_ENUM(NSInteger, PLTDeviceError) {
+	PLTDeviceErrorUnknownError =					1,
 	PLTDeviceErrorConnectionAlreadyOpen =			2,
 	PLTDeviceErrorConnectionNotOpen =				3,
 	PLTDeviceErrorInvalidArgument =                 4,

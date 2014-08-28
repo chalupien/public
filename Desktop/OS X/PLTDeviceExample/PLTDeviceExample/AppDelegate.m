@@ -10,6 +10,13 @@
 #import "MainWindowController.h"
 
 
+
+@interface PLTDLogger : NSObject
++ (PLTDLogger *)sharedLogger;
+@property(nonatomic,assign)	NSInteger	level;
+@end
+
+
 @interface AppDelegate ()
 
 @property(nonatomic,strong) MainWindowController *mainWindowController;
@@ -23,6 +30,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+	[PLTDLogger sharedLogger].level = 0;
     self.mainWindowController = [[MainWindowController alloc] init];
     [self.mainWindowController showWindow:self];
 }

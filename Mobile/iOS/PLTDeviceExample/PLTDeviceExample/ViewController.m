@@ -141,6 +141,13 @@
     if (DEVICE_IPAD) self = [super initWithNibName:@"ViewController_iPad" bundle:nil];
     else self = [super initWithNibName:@"ViewController_iPhone" bundle:nil];
     
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
     // register for device connectivity-related notifications
     
     // connection open
@@ -205,7 +212,7 @@
     }];
     
     // new device available
-    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceAvailableNotification object:Nil queue:NULL usingBlock:^(NSNotification *note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLTDeviceAvailableNotification object:nil queue:NULL usingBlock:^(NSNotification *note) {
 	   PLTDevice *device = (PLTDevice *)([note userInfo][PLTDeviceNotificationKey]);
 	   
 	   NSLog(@"Device available: %@", device);
@@ -213,7 +220,7 @@
 	   // if we're not already connected to a device, connect to this one.
 	   
 	   if (!self.device) {
-	   NSLog(@"Opening connection to %@...", device);
+		  NSLog(@"Opening connection to %@...", device);
 		  self.device = device;
 		  NSError *err = nil;
 		  [self.device openConnection:&err];
@@ -222,8 +229,6 @@
 		  }
 	   }
     }];
-    
-    return self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -237,6 +242,7 @@
     NSArray *devices = [PLTDevice availableDevices];
     if ([devices count]) {
         self.device = devices[0];
+	   NSLog(@"Opening connection to %@...", self.device);
 	   NSError *err = nil;
 	   [self.device openConnection:&err];
 	   if (err) {

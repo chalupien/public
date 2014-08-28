@@ -66,7 +66,7 @@
                 android:gravity="right"
                 android:textSize="7pt"
                 android:textColor="@color/value"
-                android:text="0" />
+                android:text="0°" />
 
         </LinearLayout>
 
@@ -105,7 +105,7 @@
                 android:gravity="right"
                 android:textSize="7pt"
                 android:textColor="@color/value"
-                android:text="0" />
+                android:text="0°" />
 
         </LinearLayout>
 
@@ -135,7 +135,7 @@
                 android:layout_weight="1"
                 android:layout_width="fill_parent"
                 android:layout_height="5pt"
-                android:max="180" />
+                android:max="360" />
 
             <TextView
                 android:id="@+id/rollValueTextView"
@@ -144,7 +144,7 @@
                 android:gravity="right"
                 android:textSize="7pt"
                 android:textColor="@color/value"
-                android:text="0" />
+                android:text="0°" />
 
         </LinearLayout>
 

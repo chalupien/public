@@ -207,7 +207,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 		// subscribe to all services
 		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		//_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_PERIODIC, (short)100);
 		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
 		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
 		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
@@ -258,13 +257,13 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 					OrientationTrackingInfo theInfo = (OrientationTrackingInfo)info;
 					EulerAngles eulerAngles = theInfo.getEulerAngles();
 
-					int heading = (int)Math.round(-eulerAngles.getX());
+					int heading = (int)Math.round(eulerAngles.getX());
 					int pitch = (int)Math.round(eulerAngles.getY());
 					int roll = (int)Math.round(eulerAngles.getZ());
 
 					_headingProgressBar.setProgress(heading + 180);
 					_pitchProgressBar.setProgress(pitch + 90);
-					_rollProgressBar.setProgress(roll + 90);
+					_rollProgressBar.setProgress(roll + 180);
 
 					// heading uses the "right-hand" rule. http://en.wikipedia.org/wiki/Right-hand_rule
 					// most people find it more intuitive if the angle increases when rotated in the opposite direction
