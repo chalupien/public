@@ -2,16 +2,14 @@
 	MainActivity.java
 	com.plantronics.device.example
 
-	Created by mdavis on 04/01/2014.
+	Created by Morgan Davis on 04/01/2014.
 	Copyright (c) 2014 Plantronics, Inc. All rights reserved.
 ***********************************************************************************************************/
 
 package com.plantronics.device.example;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +28,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 
 	private Context 		_context;
 	private Device 			_device;
-	private AlertDialog		_noPairedDevicesAlert;
 
 	private ProgressBar		_headingProgressBar;
 	private ProgressBar		_pitchProgressBar;
@@ -47,7 +44,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	private TextView		_magnetometerCalValueTextView;
 	private TextView		_gyroscopeCalValueTextView;
 	private Button			_calOrientationButton;
-	private OrientationTrackingInfo _someSavedOrientationTrackingInfo;
 
 
 	/* ****************************************************************************************************
@@ -57,11 +53,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
-		// set view background white
-//		View relativeLayout = findViewById(R.id.relativeLayout);
-//		View root = relativeLayout.getRootView();
-//		root.setBackgroundColor(android.R.color.white);
 
 		_context = this;
 
@@ -141,39 +132,29 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		ArrayList<Device> devices = Device.getPairedDevices();
 		Log.i(TAG, "devices: " + devices);
 
-		if (devices.size() > 0) {
-			_device = devices.get(0);
-			_device.registerConnectionListener((ConnectionListener)_context);
-			_device.openConnection();
+		try {
+			if (devices.size() > 0) {
+				_device = devices.get(0);
+				_device.registerConnectionListener((ConnectionListener)_context);
+				_device.openConnection();
+			}
+			else {
+				Log.i(TAG, "No paired PLT devices found!");
+			}
 		}
-		else {
-			Log.i(TAG, "No paired PLT devices found!");
-
-//			runOnUiThread(new Runnable() {
-//				@Override
-//				public void run() {
-//					AlertDialog.Builder builder = new AlertDialog.Builder(_context);
-//					builder.setCancelable(true);
-//					builder.setTitle("No Paired Devices");
-//					builder.setMessage("Please pair a device in the Settings app.");
-//					builder.setPositiveButton("OK",
-//							new DialogInterface.OnClickListener() {
-//								@Override
-//								public void onClick(DialogInterface dialog, int which) {
-//									dialog.dismiss();
-//								}
-//							});
-//
-//					_noPairedDevicesAlert = builder.create();
-//					_noPairedDevicesAlert.show();
-//				}
-//			});
+		catch (Exception e) {
+			Log.e(TAG, "Exception opening connection: " + e);
 		}
 	}
 
 	private void calOrientationButton() {
 		// "zero" orientation tracking at current orientation
-		_device.setCalibration(null, Device.SERVICE_ORIENTATION_TRACKING);
+		try {
+			_device.setCalibration(null, Device.SERVICE_ORIENTATION_TRACKING);
+		}
+		catch (Exception e) {
+			Log.e(TAG, "Exception calibrating orientation: " + e);
+		}
 	}
 
 	/* ****************************************************************************************************
@@ -183,7 +164,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	public void onDevicePaired(Device device) {
 		Log.i(TAG, "onDevicePaired(): " + device);
 
-		_noPairedDevicesAlert.dismiss();
 		tryConnecting();
 	}
 
@@ -198,22 +178,20 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 	public void onConnectionOpen(Device device) {
 		Log.i(TAG, "onConnectionOpen()");
 
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				//_connectedTextView.setText("Connected");
-			}
-		});
-
 		// subscribe to all services
-		_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_PEDOMETER, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_FREE_FALL, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_MAGNETOMETER_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
-		_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		try {
+			_device.subscribe(this, Device.SERVICE_ORIENTATION_TRACKING, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_WEARING_STATE, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_PROXIMITY, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_TAPS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_PEDOMETER, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_FREE_FALL, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_MAGNETOMETER_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+			_device.subscribe(this, Device.SERVICE_GYROSCOPE_CAL_STATUS, Device.SUBSCRIPTION_MODE_ON_CHANGE, (short)0);
+		}
+		catch (Exception e) {
+			Log.e(TAG, "Exception subscribing to services: " + e);
+		}
 
 		calOrientationButton();
 	}
@@ -230,13 +208,6 @@ public class MainActivity extends Activity implements PairingListener, Connectio
 		Log.i(TAG, "onConnectionClosed()");
 
 		_device = null;
-
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				//_connectedTextView.setText("Disconnected");
-			}
-		});
 	}
 
 	/* ****************************************************************************************************
